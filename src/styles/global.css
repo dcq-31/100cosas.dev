@@ -161,6 +161,10 @@ body {
 @media (max-width: 767px) {
     body {
         background-attachment: scroll;
+        background-image:
+            radial-gradient(circle at 12% -8%, var(--bg-glow-1), transparent 400px),
+            radial-gradient(circle at 88% 0%, var(--bg-glow-2), transparent 450px),
+            radial-gradient(var(--grid-dot) 1px, transparent 1px);
     }
 }
 
