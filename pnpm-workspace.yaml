@@ -4,3 +4,7 @@ allowBuilds:
   puppeteer: true
   sharp: true
   workerd: true
+minimumReleaseAgeExclude:
+  - '@puppeteer/browsers'
+  - puppeteer-core
+  - puppeteer
