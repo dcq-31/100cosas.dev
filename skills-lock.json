@@ -19,7 +19,7 @@
     "cloudflare": {
       "source": "cloudflare/skills",
       "sourceType": "autoskills-registry",
-      "computedHash": "0adf5220c89bc875e1a16e3ea2f7ffa865248ae6740d419eba1e3b350ccd839d"
+      "computedHash": "da4a0ac8024248882401e17848856237e063620c7781f47bd89fcdcf72f902b3"
     },
     "cloudflare-deploy": {
       "source": "openai/skills",
@@ -89,7 +89,7 @@
     "wrangler": {
       "source": "cloudflare/skills",
       "sourceType": "autoskills-registry",
-      "computedHash": "039c557179b9e2ddc3885b53e44504a7e9ad376e3582719d87b45bf776923956"
+      "computedHash": "d9a05896e7ef591d4c499436ce0a53c510800832de30de866b2c2999efe3f622"
     }
   }
 }
