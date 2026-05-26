@@ -17,5 +17,19 @@
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "Think Python en español",
+      "short_name": "Think Python",
+      "description": "Lee Think Python en español.",
+      "url": "https://libropython.es/"
+    },
+    {
+      "name": "PDF de Think Python en español",
+      "short_name": "PDF Think Python",
+      "description": "Descarga Think Python en español en PDF.",
+      "url": "https://libropython.es/think-python-es.pdf"
+    }
   ]
 }
