@@ -15,7 +15,7 @@
     "generate-types": "wrangler types"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^13.5.4",
+    "@astrojs/cloudflare": "13.5.4",
     "@astrojs/mdx": "5.0.6",
     "@astrojs/sitemap": "3.7.2",
     "@resvg/resvg-js": "2.6.2",
@@ -26,7 +26,7 @@
     "satori": "0.26.0",
     "sharp": "0.34.5",
     "tailwindcss": "4.3.0",
-    "wrangler": "^4.94.0"
+    "wrangler": "4.94.0"
   },
   "devDependencies": {
     "epub-gen": "0.1.0",
