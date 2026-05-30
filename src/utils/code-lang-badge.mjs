@@ -56,13 +56,19 @@ const LANGS = {
 export function codeLangBadge() {
   return {
     name: 'code-lang-badge',
-    pre(node) {
+    root(node) {
       const lang = this.options.lang
       if (!lang) return
 
       const meta = LANGS[lang]
       if (meta === null) return
 
+      const preIndex = node.children.findIndex(
+        (child) => child.type === 'element' && child.tagName === 'pre',
+      )
+      if (preIndex === -1) return
+
+      const pre = node.children[preIndex]
       const displayName = meta?.name || lang
       const children = []
 
@@ -88,14 +94,26 @@ export function codeLangBadge() {
         value: displayName,
       })
 
-      node.children.unshift({
+      const badge = {
         type: 'element',
         tagName: 'span',
         properties: {
           class: 'code-lang-badge',
         },
         children,
-      })
+      }
+
+      const figure = {
+        type: 'element',
+        tagName: 'figure',
+        properties: {
+          class: 'code-block',
+          'data-language': lang,
+        },
+        children: [badge, pre],
+      }
+
+      node.children.splice(preIndex, 1, figure)
     },
   }
 }
