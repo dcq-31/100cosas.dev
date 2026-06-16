@@ -38,9 +38,12 @@ const skipToContentLabel =
   lang === "es" ? "Saltar al contenido principal" : "Skip to main content"
 const darkThemeColor = "#0b1220"
 const lightThemeColor = "#f8fafc"
+const homeURL = new URL("/", Astro.site)
 
 // Logic for hreflang
 const alternateLang = lang === "es" ? "en" : "es"
+const localeCode = lang === "es" ? "es-ES" : "en-US"
+const alternateLocaleCode = lang === "es" ? "en-US" : "es-ES"
 const alternatePath = alternateUrl ?? (
   lang === "es"
     ? `/en${Astro.url.pathname === "/" ? "" : Astro.url.pathname}`
@@ -58,10 +61,10 @@ const baseJsonLd = {
   "name": "100cosas.dev",
   "alternateName": "100 Cosas que Todo Programador Debería Saber",
   "url": "https://100cosas.dev",
+  "inLanguage": ["es-ES", "en-US"],
   "description": lang === "es"
     ? "Consejos fundamentales para programadores y desarrolladores de software"
     : "Essential tips for programmers and software developers",
-  "inLanguage": [lang === "es" ? "es-ES" : "en-US"],
   "publisher": {
     "@type": "Organization",
     "name": "midudev",
@@ -168,7 +171,6 @@ const breadcrumbJsonLd = {
     <!-- SEO Meta Tags Básicos -->
     <title>{seoTitle}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content={keywords.join(", ")} />
     <meta name="author" content={author} />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalURL} />
@@ -183,18 +185,16 @@ const breadcrumbJsonLd = {
     <meta name="color-scheme" content="dark light" />
     <meta name="msapplication-TileColor" content={lightThemeColor} />
 
-    <!-- Geo y Audiencia -->
-    <meta name="geo.region" content="ES" />
-    <meta name="rating" content="general" />
-    <meta name="revisit-after" content="7 days" />
+    <!-- Compatibilidad -->
+    <meta name="format-detection" content="telephone=no" />
 
     <!-- i18n Hreflang -->
-    <link rel="alternate" hreflang={lang} href={canonicalURL} />
-    <link rel="alternate" hreflang={alternateLang} href={alternateURL} />
+    <link rel="alternate" hreflang={localeCode} href={canonicalURL} />
+    <link rel="alternate" hreflang={alternateLocaleCode} href={alternateURL} />
     <link
       rel="alternate"
       hreflang="x-default"
-      href={new URL("/", Astro.site)}
+      href={homeURL}
     />
 
     <!-- Open Graph / Facebook -->
@@ -234,9 +234,6 @@ const breadcrumbJsonLd = {
     <meta name="twitter:image" content={fullImageURL} />
     <meta name="twitter:image:alt" content={title} />
     <meta name="twitter:domain" content="100cosas.dev" />
-
-    <!-- LinkedIn -->
-    <meta property="linkedin:owner" content="midudev" />
 
     <!-- Font preload -->
     <link rel="preload" href="/fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin />

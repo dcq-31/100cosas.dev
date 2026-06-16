@@ -20,6 +20,22 @@ const { sortedTips, canonical, alternateUrl, noindex = false } = Astro.props
 const lang = (Astro.currentLocale as "es" | "en") || "es"
 const t = useTranslations(lang)
 const searchIndexUrl = lang === "es" ? "/search-index.json" : "/en/search-index.json"
+const pageTitle = `${t("hero.title")} ${t("hero.subtitle")}`
+const pageDescription = t("hero.description")
+
+const collectionJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: pageTitle,
+  description: pageDescription,
+  url: new URL(canonical ?? Astro.url.pathname, Astro.site).toString(),
+  inLanguage: lang === "es" ? "es-ES" : "en-US",
+  isPartOf: {
+    "@type": "WebSite",
+    name: "100cosas.dev",
+    url: Astro.site?.toString(),
+  },
+}
 
 const allTips = Array.from({ length: 100 }, (_, i) => {
   const tipId = (i + 1).toString().padStart(2, "0")
@@ -46,12 +62,14 @@ const allTips = Array.from({ length: 100 }, (_, i) => {
 ---
 
 <Layout
-  title={`${t("hero.title")} ${t("hero.subtitle")} | 100cosas.dev`}
-  description={t("hero.description")}
+  title={`${pageTitle} | 100cosas.dev`}
+  description={pageDescription}
   canonical={canonical}
   alternateUrl={alternateUrl}
   noindex={noindex}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(collectionJsonLd)} />
+
   <Navbar total={sortedTips.length} showSearch />
 
   <main

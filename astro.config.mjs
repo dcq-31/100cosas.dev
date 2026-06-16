@@ -12,13 +12,10 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: 'https://100cosas.dev',
   prefetch: false,
-
-  vite: {
-    plugins: [tailwindcss()]
-  },
-
   integrations: [
     mdx(),
+    tailwindcss(),
+
     sitemap({
       i18n: {
         defaultLocale: 'es',
@@ -69,9 +66,9 @@ export default defineConfig({
     defaultLocale: 'es',
     locales: ['es', 'en'],
     routing: {
-      prefixDefaultLocale: false
-    }
+      prefixDefaultLocale: false,
+    },
   },
 
-  adapter: cloudflare()
+  adapter: cloudflare(),
 });

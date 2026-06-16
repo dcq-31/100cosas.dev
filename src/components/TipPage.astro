@@ -57,7 +57,9 @@ const jsonLd = {
   "@type": "Article",
   headline: title,
   description,
-  image: `https://100cosas.dev/authors/${authorEntry.data.id}.webp`,
+  mainEntityOfPage: new URL(canonical ?? Astro.url.pathname, Astro.site).toString(),
+  image: [new URL(`/og/${entry.id}.jpg`, Astro.site).toString()],
+  inLanguage: lang === "es" ? "es-ES" : "en-US",
   author: {
     "@type": "Person",
     name: authorName,
@@ -70,6 +72,11 @@ const jsonLd = {
       "@type": "ImageObject",
       url: "https://100cosas.dev/favicon.svg",
     },
+  },
+  isPartOf: {
+    "@type": "WebSite",
+    name: "100cosas.dev",
+    url: "https://100cosas.dev",
   },
 }
 ---
