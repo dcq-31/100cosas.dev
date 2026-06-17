@@ -8,3 +8,5 @@ minimumReleaseAgeExclude:
   - '@puppeteer/browsers'
   - puppeteer-core
   - puppeteer
+  - miniflare@4.20260616.0
+  - wrangler@4.101.0

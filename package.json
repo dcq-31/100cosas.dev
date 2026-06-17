@@ -27,7 +27,7 @@
     "satori": "0.26.0",
     "sharp": "0.35.1",
     "tailwindcss": "4.3.1",
-    "wrangler": "4.100.0"
+    "wrangler": "4.101.0"
   },
   "devDependencies": {
     "epub-gen": "0.1.0",
