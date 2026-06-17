@@ -12,9 +12,12 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: 'https://100cosas.dev',
   prefetch: false,
+  vite: {
+    plugins: [tailwindcss()],
+  },
+
   integrations: [
     mdx(),
-    tailwindcss(),
 
     sitemap({
       i18n: {
