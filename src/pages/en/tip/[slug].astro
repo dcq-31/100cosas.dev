@@ -49,13 +49,15 @@ const otherTips = await getCollection("tips", (tip) => {
 })
 const spanishSlug =
   otherTips.length > 0 ? otherTips[0].id.replace(/^es\//, "") : null
-const alternateUrl = spanishSlug ? `/consejo/${spanishSlug}` : "/"
+const alternateUrl = spanishSlug ? `/consejo/${spanishSlug}/` : "/"
+const slug = entry.id.replace(/^en\//, "")
 ---
 
 <TipPage
   entry={entry}
   total={total}
   alternateUrl={alternateUrl}
+  canonical={`/en/tip/${slug}/`}
   prev={prev}
   next={next}
 />

@@ -21,12 +21,16 @@ const photo = `/authors/${authorIdField}.webp`
 const lang = (Astro.currentLocale as "es" | "en") || "es"
 const t = useTranslations(lang)
 const authorBio = bio[lang] || bio[lang === "es" ? "es" : "en"]
+const selfCanonical =
+  lang === "es" ? `/autor/${authorIdField}/` : `/en/autor/${authorIdField}/`
 ---
 
 <Layout
   title={`${name} | ${t('author.title')} | 100cosas.dev`}
   description={authorBio}
   ogType="profile"
+  canonical={selfCanonical}
+  alternateUrl={alternateUrl}
 >
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",

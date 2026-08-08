@@ -25,15 +25,11 @@ const TIPS_DIR = join(ROOT, "src/content/tips")
 const AUTHORS_DIR = join(ROOT, "src/content/authors")
 const OUTPUT_DIR = join(ROOT, "public/og")
 
-const geistRegular = readFileSync(
-  join(ROOT, "node_modules/geist/dist/fonts/geist-sans/Geist-Regular.ttf")
-)
-const geistBold = readFileSync(
-  join(ROOT, "node_modules/geist/dist/fonts/geist-sans/Geist-Bold.ttf")
-)
-const geistMonoBold = readFileSync(
-  join(ROOT, "node_modules/geist/dist/fonts/geist-mono/GeistMono-Bold.ttf")
-)
+const FONTS_DIR = join(__dirname, "fonts")
+
+const geistRegular = readFileSync(join(FONTS_DIR, "Geist-Regular.ttf"))
+const geistBold = readFileSync(join(FONTS_DIR, "Geist-Bold.ttf"))
+const geistMonoBold = readFileSync(join(FONTS_DIR, "GeistMono-Bold.ttf"))
 
 function loadAuthors() {
   const authors = new Map()

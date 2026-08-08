@@ -31,25 +31,38 @@ const {
 } = Astro.props
 
 const lang = Astro.currentLocale || "es"
-const canonicalPath = canonical ?? Astro.url.pathname
+
+/** Normalize site paths so canonical/hreflang always match trailingSlash: 'always' */
+function normalizeSitePath(path: string): string {
+  if (!path || path === "/") return "/"
+  const withLeading = path.startsWith("/") ? path : `/${path}`
+  // Keep file-like paths (e.g. .json) without trailing slash
+  if (/\.[a-z0-9]+$/i.test(withLeading)) return withLeading
+  return withLeading.endsWith("/") ? withLeading : `${withLeading}/`
+}
+
+const canonicalPath = normalizeSitePath(canonical ?? Astro.url.pathname)
 const canonicalURL = new URL(canonicalPath, Astro.site)
 const fullImageURL = new URL(image, Astro.site).toString()
 const skipToContentLabel =
   lang === "es" ? "Saltar al contenido principal" : "Skip to main content"
 const darkThemeColor = "#0b1220"
 const lightThemeColor = "#f8fafc"
-const homeURL = new URL("/", Astro.site)
 
-// Logic for hreflang
-const alternateLang = lang === "es" ? "en" : "es"
+// Logic for hreflang — never invent alternate paths by prefixing locale;
+// wrong guesses create 404s (e.g. /en/consejo/spanish-slug).
 const localeCode = lang === "es" ? "es-ES" : "en-US"
 const alternateLocaleCode = lang === "es" ? "en-US" : "es-ES"
-const alternatePath = alternateUrl ?? (
-  lang === "es"
-    ? `/en${Astro.url.pathname === "/" ? "" : Astro.url.pathname}`
-    : Astro.url.pathname.replace(/^\/en(?=\/|$)/, "") || "/"
-)
+const alternatePath = alternateUrl
+  ? normalizeSitePath(alternateUrl)
+  : lang === "es"
+    ? "/en/"
+    : "/"
 const alternateURL = new URL(alternatePath, Astro.site)
+// x-default: Spanish (default locale) version of this page when available
+const xDefaultPath =
+  lang === "es" ? canonicalPath : alternatePath === "/en/" ? "/" : alternatePath
+const xDefaultURL = new URL(xDefaultPath, Astro.site)
 
 // Determinar título SEO optimizado
 const seoTitle = title.includes("100cosas.dev") ? title : `${title} | 100cosas.dev`
@@ -191,11 +204,7 @@ const breadcrumbJsonLd = {
     <!-- i18n Hreflang -->
     <link rel="alternate" hreflang={localeCode} href={canonicalURL} />
     <link rel="alternate" hreflang={alternateLocaleCode} href={alternateURL} />
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href={homeURL}
-    />
+    <link rel="alternate" hreflang="x-default" href={xDefaultURL} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={ogType} />

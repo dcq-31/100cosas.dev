@@ -21,7 +21,7 @@ const authorTips = allTips
   .filter((tip) => tip.data.author === entry.id)
   .sort((a, b) => parseInt(a.data.id) - parseInt(b.data.id))
 
-const alternateUrl = `/autor/${entry.id}`
+const alternateUrl = `/autor/${entry.id}/`
 ---
 
 <AuthorPage

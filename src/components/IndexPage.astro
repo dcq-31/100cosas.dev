@@ -70,7 +70,7 @@ const allTips = Array.from({ length: 100 }, (_, i) => {
 >
   <script type="application/ld+json" set:html={JSON.stringify(collectionJsonLd)} />
 
-  <Navbar total={sortedTips.length} showSearch />
+  <Navbar total={sortedTips.length} showSearch alternateUrl={alternateUrl} />
 
   <main
     id="main-content"

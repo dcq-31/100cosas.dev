@@ -87,6 +87,7 @@ const jsonLd = {
   ogType="article"
   image={`/og/${entry.id}.jpg`}
   canonical={canonical}
+  alternateUrl={alternateUrl}
   noindex={noindex}
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
